@@ -1,10 +1,8 @@
 var jsonfile = require('jsonfile');
 var path = require('path');
-var file = path.resolve(__dirname, '../raw_data/h9.json');
+var file = path.join(__dirname, '/h9.json');
 var fs = require('fs');
 var obj;
-
-console.log(appDir);
 
 fs.readFile(file, 'utf8', function(err, data){
     
