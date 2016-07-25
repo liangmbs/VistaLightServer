@@ -1,8 +1,1 @@
-{
-    "session_id": "",
-    "player_id": "",
-    "game_id": "",
-    "client_start_time": "",
-    "client_end_time": "",
-    "run_counter": ""
-}
+{"session_id":"ad72d0e2-b2e5-4f07-8cfe-78e0e8cc6297","player_id":"71fabf75-13c9-4a7a-b8bc-d95a7eb51c2c","game_id":"VistaLights","client_start_time":"1460411755.14312","client_end_time":"1460415539.80712","run_counter":"3","version":"2.0","condition":"","details":{"bg":"non-STEM"}}

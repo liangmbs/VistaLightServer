@@ -1,14 +1,18 @@
 var jsonfile = require('jsonfile');
-var path = require('path');
-var file = path.join(__dirname, '/h9.json');
-var fs = require('fs');
-var obj;
 
-fs.readFile(file, 'utf8', function(err, data){
+
+
+module.exports = { 
+    parsing : function (file, callback){
+        jsonfile.readFile(file, function(err, obj) {
+            callback && callback(obj)
+
+        })
+
+    }, 
     
-    if (err) throw err;
-    obj = JSON.parse(data);   
-})
+    
+};
 
 
 
@@ -16,12 +20,7 @@ fs.readFile(file, 'utf8', function(err, data){
 
 
 /*
-jsonfile.readFile(file, function(err, obj) {
-    
-    for(var i = 0; i< obj.length; ++i){
-        console.log("type:" + obj[i].type);
-    }
-     
-})
-*/
+RunWriter.writeRun(data);
 
+ActionWriter.writeAction(data);
+*/
