@@ -1,67 +1,11 @@
 var jsonfile = require('jsonfile'); 
-
+var Run = require('./Model/RunSchema')
+/*
 module.exports = {
-    WriteRun: function(file, runs){
-        var obj = {
-            "session_id": runs[0].data.session_id,
-            "run_0": {
-                "run_id": "",
-                "start_client_time": "",
-                "end_client_time": "",
-                "start_current_time":"",
-                "end_current_time": "",
-                "action_count": "",
-                "map" : "",
-                "give_recommendation": "",
-                "with_justification": "",
-                "budget": "",
-                "welfare": "",
-                "dock_utilization" : ""
-            },
-            "run_1": {
-                "run_id": "",
-                "start_client_time": "",
-                "end_client_time": "",
-                "start_current_time":"",
-                "end_current_time": "",
-                "action_count": "",
-                "map" : "",
-                "give_recommendation": "",
-                "with_justification": "",
-                "budget": "",
-                "welfare": "",
-                "dock_utilization" : ""
-            },
-            "run_2": {
-                "run_id": "",
-                "start_client_time": "",
-                "end_client_time": "",
-                "start_current_time":"",
-                "end_current_time": "",
-                "action_count": "",
-                "map" : "",
-                "give_recommendation": "",
-                "with_justification": "",
-                "budget": "",
-                "welfare": "",
-                "dock_utilization" : ""
-            },
-            "run_3": {
-                "run_id": "",
-                "start_client_time": "",
-                "end_client_time": "",
-                "start_current_time":"",
-                "end_current_time": "",
-                "action_count": "",
-                "map" : "",
-                "give_recommendation": "",
-                "with_justification": "",
-                "budget": "",
-                "welfare": "",
-                "dock_utilization" : ""
-            }
-        }
-        
+    WriteRun: function(runs){
+        //write to the database
+        var obj = new Run ();
+        obj.session_id = runs[0].session_id;
         for(var i = 0; i < runs.length; i = i+2){
             switch (i){
                 case 0:
@@ -155,8 +99,33 @@ module.exports = {
             }             
         }
         
-        jsonfile.writeFile(file, obj, {space : 2}, function(err){
-          console.error(err)  
-        })
+        //save to the database
+        obj.save(function(err){
+            if (err) throw err;
+            
+            console.log("new Run has been created");
+        });
     }
 }
+
+*/
+module.exports = {
+    WriteRun: function(runs){
+        for(var i =0; i< runs.length; i++){
+            var obj = new Run();
+            obj.session_id = runs[i].data.session_id;
+            obj.run_id = runs[i].data.run_id;
+            obj.run_seqno = runs[i].data.run_seqno;
+            obj.client_time = Date(runs[i].data.client_time);
+            obj.details = runs[i].data.details;
+            
+            
+            obj.save(function(err){
+                if (err) throw err;
+
+                console.log("new Run has been created");
+            });
+        }
+    }
+}
+
