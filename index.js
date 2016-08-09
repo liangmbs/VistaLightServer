@@ -1,8 +1,6 @@
-var mongoose = require('mongoose');
-var db = mongoose.connection;
+var AWS = require('aws-sdk');
 
 var http = require('http');
-
 
 var path = require('path');
 var file = path.join(__dirname, '/h9.json');
@@ -39,7 +37,7 @@ Parser.parsing(file, function(obj){
             }
     }
     
-    //save session to mongoDB
+    //save session to AWS
     SessionWriter.WriteSession(sessions[0], sessions[1]);
     
     RunWriter.WriteRun(runs);
@@ -47,32 +45,4 @@ Parser.parsing(file, function(obj){
     ActionWriter.WriteAction(actions);
 });
 
-//create a server
-http.createServer(function (req, res) {  
-  pages.index(req, res);
-}).listen(8888, '127.0.0.1');
-
-
-// mongodb connection
-
-var dbURI = 'mongodb://localhost/ConnectionTest'; 
-mongoose.connect(dbURI); 
-mongoose.connection.on('connected', function () {  
-  console.log('Mongoose default connection open to ' + dbURI);
-}); 
-
-mongoose.connection.on('error',function (err) {  
-  console.log('Mongoose default connection error: ' + err);
-}); 
-
-mongoose.connection.on('disconnected', function () {  
-  console.log('Mongoose default connection disconnected'); 
-});
-
-process.on('SIGINT', function() {  
-  mongoose.connection.close(function () { 
-    console.log('Mongoose default connection disconnected through app termination'); 
-    process.exit(0); 
-  }); 
-}); 
 

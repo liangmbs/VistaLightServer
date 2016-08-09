@@ -71,7 +71,6 @@ var runSchema = new Schema({
     run_seqno: Number,
     client_time: Date,
     details: Schema.Types.Mixed,
-
     
 })
 runSchema.plugin(timestamps);
